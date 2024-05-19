@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Intro</title>
-</head>
-<body>
-    <p>hello world</p>
-</body>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        position: relative;
+        overscroll-behavior: none;
+      }
+      body {
+        word-wrap: break-word;
+        overflow-x: hidden;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>TOYS</h1>
+    <a href="https://victorious-cliff-0fe836900.5.azurestaticapps.net/">TOY1</a>
+    <script>
+      window.addEventListener("scroll", handleScroll);
+      function handleScroll() {
+        // current scroll px
+        let scrollTop = window.scrollY;
+        // height of body px
+        let scrollHeight = document.body.scrollHeight;
+        // height of window px
+        let height = window.innerHeight;
+        let scrollPercent = (scrollTop / (scrollHeight - height)) * 100;
+        // console.log(scrollTop, scrollHeight, height, scrollPercent);
+        // document.querySelector("h1").style.top = `${scrollPercent / 1.1}%`;
+      }
+    </script>
+  </body>
 </html>
