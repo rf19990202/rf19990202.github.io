@@ -115,24 +115,32 @@
     <div>
       <h2>TOYS</h2>
       <div>
-        <h4>TOY1-SB</h4>
-        <p>
-          SB is Self-Blog implementation with react front end and asp.net core
-          backend
-        </p>
-        <a href="https://victorious-cliff-0fe836900.5.azurestaticapps.net/"
-          >Click me</a
-        >
+        <h4>Weather</h4>
+        <input placeholder="location" /><button id="get-weather-button">
+          get weather
+        </button>
       </div>
     </div>
     <script>
-      window.addEventListener("scroll", handleScroll);
       function handleScroll() {
         let scrollTop = window.scrollY;
         let scrollHeight = document.body.scrollHeight;
         let height = window.innerHeight;
         let scrollPercent = (scrollTop / (scrollHeight - height)) * 100;
       }
+      async function handleGetWeather(e) {
+        if (e.target.previousElementSibling.value != "") {
+          fetch(
+            `http://localhost:8080/?location=${e.target.previousElementSibling.value}`
+          )
+            .then((ret) => ret.json())
+            .then((ret) => console.log(ret));
+        }
+      }
+      document
+        .getElementById("get-weather-button")
+        .addEventListener("click", handleGetWeather);
+      window.addEventListener("scroll", handleScroll);
     </script>
   </body>
 </html>
