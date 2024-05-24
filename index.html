@@ -138,6 +138,7 @@
       <div id="weather">my weather</div>
     </div>
     <script defer>
+      let BASE_URL = "https://phrasal-clover-408902.de.r.appspot.com";
       (async () => {
         function getLocation() {
           if (navigator.geolocation) {
@@ -153,7 +154,7 @@
           onSuccess: async function (p) {
             console.log(p.coords.latitude, p.coords.longitude);
             fetch(
-              `http://localhost:8080/currentstation?latitude=${p.coords.latitude}&longitude=${p.coords.longitude}`
+              `${BASE_URL}/currentstation?latitude=${p.coords.latitude}&longitude=${p.coords.longitude}`
             )
               .then((ret) => ret.json())
               .then((ret) => handleGetWeather(ret.StationId));
@@ -163,7 +164,7 @@
         getLocation();
       })();
       async function handleGetWeather(stationId) {
-        fetch(`http://localhost:8080/?stationId=${stationId}`)
+        fetch(`${BASE_URL}/weather?stationId=${stationId}`)
           .then((ret) => ret.json())
           .then((ret) => {
             console.log(ret);
