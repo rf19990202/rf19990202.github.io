@@ -279,12 +279,18 @@
               getLocationCallbacks.onError
             );
           } else {
-            x.innerHTML = "Geolocation is not supported";
+            document.getElementById("weather").innerHTML =
+              "Geolocation is not supported";
           }
         }
         const getLocationCallbacks = {
           onSuccess: async function (p) {
             console.log(p.coords.latitude, p.coords.longitude);
+            document.getElementById(
+              "weather"
+            ).innerHTML += `${BASE_URL}/currentstation?latitude=${
+              Math.round(p.coords.latitude * 1000000) / 1000000
+            }&longitude=${Math.round(p.coords.longitude * 1000000) / 1000000}`;
             fetch(
               `${BASE_URL}/currentstation?latitude=${
                 Math.round(p.coords.latitude * 1000000) / 1000000
