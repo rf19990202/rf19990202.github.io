@@ -285,6 +285,9 @@
         const getLocationCallbacks = {
           onSuccess: async function (p) {
             console.log(p.coords.latitude, p.coords.longitude);
+            document.getElementById(
+              "weather"
+            ).innerHTML += `${p.coords.latitude}&${p.coords.longitude}`;
             fetch(
               `${BASE_URL}/currentstation?latitude=${p.coords.latitude}&longitude=${p.coords.longitude}`
             )
@@ -300,7 +303,7 @@
           .then((ret) => ret.json())
           .then((ret) => {
             console.log(ret);
-            document.getElementById("weather").innerHTML = `
+            document.getElementById("weather").innerHTML += `
             <p>${ret.Time}</p>
             <p>${ret.StationName}</p>
             <p>${ret.Temperature}°C</p>
