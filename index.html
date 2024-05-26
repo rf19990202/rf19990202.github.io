@@ -269,6 +269,7 @@
       <div></div>
       <div></div>
     </div>
+    <div id="console"></div>
     <script defer>
       let BASE_URL = "https://phrasal-clover-408902.de.r.appspot.com";
       (async () => {
@@ -285,13 +286,13 @@
         }
         const getLocationCallbacks = {
           onSuccess: async function (p) {
-            fetch(
+            const station = await fetch(
               `${BASE_URL}/currentstation?latitude=${
                 Math.round(p.coords.latitude * 1000000) / 1000000
               }&longitude=${Math.round(p.coords.longitude * 1000000) / 1000000}`
-            )
-              .then((ret) => ret.json())
-              .then((ret) => handleGetWeather(ret.StationId));
+            ).then((ret) => ret.json());
+            document.getElementById("console").innerText = station.StationId;
+            handleGetWeather(station.StationId);
           },
           onError: function () {},
         };
