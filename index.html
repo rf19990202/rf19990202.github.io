@@ -289,7 +289,7 @@
             const station = await fetch(
               `${BASE_URL}/currentstation?latitude=${
                 Math.round(p.coords.latitude * 1000000) / 1000000
-              }&longitude=${Math.round(p.coords.longitude * 1000000) / 1000000}`
+              }&longitude=${Math.round(p.coords.longitude * 1000000) / 1000000}&time=${new Date().now}`
             ).then((ret) => ret.json());
             document.getElementById("console").innerText = station.StationId;
             handleGetWeather(station.StationId);
