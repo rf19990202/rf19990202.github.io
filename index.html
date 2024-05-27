@@ -87,7 +87,7 @@
             margin: 2rem;
             border-radius: 5px;
             overflow: hidden;
-            background: rgb(0, 17, 255);
+            /* background: rgb(0, 17, 255); */
             background-repeat: repeat;
             animation: sky-color 2s linear;
             & > div#weather-info {
@@ -275,37 +275,35 @@
             // TODO different weather animations
             // var weather should come from api
             let weather = "sunny";
-            if (weather == "sunny") {
-              document.getElementById("sunny").style.display = "block";
-              document.getElementById("sunny").animate(
-                [
-                  {
-                    height: "0",
-                    opacity: "0",
-                  },
-                  {
-                    height: "30dvh",
-                    opacity: "1",
-                  },
-                ],
+            document.getElementById(weather).style.display = "block";
+            // this animation should vary with different weather
+            document.getElementById(weather).animate(
+              [
                 {
-                  duration: 1000,
-                }
-              );
-              weatherBackgroundAnimation.sunny();
-            }
+                  height: "0",
+                  opacity: "0",
+                },
+                {
+                  height: "30dvh",
+                  opacity: "1",
+                },
+              ],
+              {
+                duration: 1000,
+              }
+            );
+            weatherBackgroundAnimation[weather]();
           })
           .then(() => {
             document.getElementById("sunny").style.height = "30dvh";
           });
-        document.getElementById("weather").style.backgroundColor = "skyblue";
       }
       const weatherBackgroundAnimation = {
         sunny: function () {
           document.getElementById("weather").animate(
             [
               {
-                backgroundColor: "blue",
+                backgroundColor: "#35374B",
               },
               {
                 backgroundColor: "skyblue",
@@ -315,9 +313,40 @@
               duration: 1000,
             }
           );
+          document.getElementById("weather").style.backgroundColor = "skyblue";
         },
-        cloudy: function () {},
-        rainy: function () {},
+        cloudy: function () {
+          document.getElementById("weather").animate(
+            [
+              {
+                backgroundColor: "#35374B",
+              },
+              {
+                backgroundColor: "#ACC2D9",
+              },
+            ],
+            {
+              duration: 1000,
+            }
+          );
+          document.getElementById("weather").style.backgroundColor = "#ACC2D9";
+        },
+        rainy: function () {
+          document.getElementById("weather").animate(
+            [
+              {
+                backgroundColor: "#35374B",
+              },
+              {
+                backgroundColor: "#6D7178",
+              },
+            ],
+            {
+              duration: 1000,
+            }
+          );
+          document.getElementById("weather").style.backgroundColor = "#6D7178";
+        },
       };
     </script>
   </body>
