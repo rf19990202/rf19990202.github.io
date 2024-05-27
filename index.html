@@ -96,8 +96,8 @@
         bottom: 0;
         right: 0;
         width: 30dvh;
-        height: 0dvh;
-        animation: 1s sunup cubic-bezier(0.25, 1, 0.25, 1);
+        /* height: 30dvh; */
+        /* animation: 1s sunup cubic-bezier(0.25, 1, 0.25, 1); */
         & > div:nth-child(1) {
           position: absolute;
           left: 10dvh;
@@ -232,7 +232,6 @@
                 Math.round(p.coords.longitude * 1000000) / 1000000
               }&time=${new Date().now}`
             ).then((ret) => ret.json());
-            document.getElementById("console").innerText = station.StationId;
             handleGetWeather(station.StationId);
           },
           onError: function () {},
@@ -249,6 +248,23 @@
             <p>${ret.StationName}</p>
             <p>${ret.Temperature}°C</p>
             <p>${ret.RelativeHumidity}%</p>`;
+          })
+          .then(() => {
+            document.getElementById("sunny").animate(
+              [
+                {
+                  height: "0",
+                  opacity: "0",
+                },
+                {
+                  height: "30dvh",
+                  opacity: "1",
+                },
+              ],
+              {
+                duration: 1000,
+              }
+            );
           })
           .then(() => {
             document.getElementById("sunny").style.height = "30dvh";
