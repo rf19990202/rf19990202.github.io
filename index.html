@@ -77,24 +77,23 @@
             background-color: rgba(128, 128, 128, 0.4);
             filter: blur(2px);
           }
-
-          & > div#weather {
-            position: fixed;
-            box-sizing: content-box;
-            width: 90%;
-            height: 50%;
-            border: 1px solid grey;
-            margin: 2rem;
-            border-radius: 5px;
-            overflow: hidden;
-            /* background: rgb(0, 17, 255); */
-            background-repeat: repeat;
-            animation: sky-color 2s linear;
-            & > div#weather-info {
-              text-align: left;
-              text-shadow: 1px 1px 2px pink;
-            }
-          }
+        }
+      }
+      #weather {
+        position: fixed;
+        box-sizing: content-box;
+        width: 90%;
+        height: 50%;
+        border: 1px solid grey;
+        margin: 2rem;
+        border-radius: 5px;
+        overflow: hidden;
+        /* background: rgb(0, 17, 255); */
+        background-repeat: repeat;
+        animation: sky-color 2s linear;
+        & > div#weather-info {
+          text-align: left;
+          text-shadow: 1px 1px 2px pink;
         }
       }
       #sunny {
@@ -158,6 +157,70 @@
       }
       #cloudy {
         display: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 80%;
+        height: 30%;
+        overflow: hidden;
+        & > div:nth-child(1) {
+          position: absolute;
+          width: 40%;
+          height: 90%;
+          overflow: hidden;
+          & > div:nth-child(1) {
+            position: absolute;
+            top: -10dvh;
+            left: -10dvh;
+            width: 20dvh;
+            height: 20dvh;
+            background-color: white;
+            border-radius: 50%;
+          }
+          & > div:nth-child(2) {
+            position: absolute;
+            top: -5dvh;
+            left: 8dvh;
+            width: 10dvh;
+            height: 10dvh;
+            background-color: white;
+            border-radius: 50%;
+          }
+        }
+        & > div:nth-child(2) {
+          position: absolute;
+          right: 0;
+          width: 50%;
+          height: 90%;
+          overflow: hidden;
+          & > div:nth-child(1) {
+            position: absolute;
+            top: -7dvh;
+            right: -10dvh;
+            width: 20dvh;
+            height: 20dvh;
+            background-color: white;
+            border-radius: 50%;
+          }
+          & > div:nth-child(2) {
+            position: absolute;
+            top: -6dvh;
+            right: 3dvh;
+            width: 15dvh;
+            height: 15dvh;
+            background-color: white;
+            border-radius: 50%;
+          }
+          & > div:nth-child(3) {
+            position: absolute;
+            top: -5dvh;
+            right: 15dvh;
+            width: 10dvh;
+            height: 10dvh;
+            background-color: white;
+            border-radius: 50%;
+          }
+        }
       }
       #rainy {
         display: none;
@@ -166,7 +229,7 @@
   </head>
 
   <body>
-    <div>
+    <div id="hidden-nav-bar">
       <div>
         <svg
           width="64px"
@@ -219,9 +282,15 @@
           <div></div>
         </div>
         <div id="cloudy">
-          <div></div>
-          <div></div>
-          <div></div>
+          <div>
+            <div></div>
+            <div></div>
+          </div>
+          <div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
         <div id="rainy">
           <div></div>
@@ -264,7 +333,6 @@
         await fetch(`${BASE_URL}/weather?stationId=${stationId}`)
           .then((ret) => ret.json())
           .then((ret) => {
-            console.log(ret);
             document.getElementById("weather-info").innerHTML = `
             <p>${ret.Time}</p>
             <p>${ret.StationName}</p>
@@ -273,33 +341,14 @@
           })
           .then(() => {
             // TODO different weather animations
-            // var weather should come from api
-            let weather = "sunny";
-            document.getElementById(weather).style.display = "block";
-            // this animation should vary with different weather
-            document.getElementById(weather).animate(
-              [
-                {
-                  height: "0",
-                  opacity: "0",
-                },
-                {
-                  height: "30dvh",
-                  opacity: "1",
-                },
-              ],
-              {
-                duration: 1000,
-              }
-            );
+            // weather should come from api
+            let weather = "cloudy";
             weatherBackgroundAnimation[weather]();
           })
-          .then(() => {
-            document.getElementById("sunny").style.height = "30dvh";
-          });
+          .then(() => {});
       }
       const weatherBackgroundAnimation = {
-        sunny: function () {
+        sunny: async function () {
           document.getElementById("weather").animate(
             [
               {
@@ -313,9 +362,26 @@
               duration: 1000,
             }
           );
+          document.getElementById("sunny").style.display = "block";
+          document.getElementById("sunny").animate(
+            [
+              {
+                height: "0",
+                opacity: "0",
+              },
+              {
+                height: "30dvh",
+                opacity: "1",
+              },
+            ],
+            {
+              duration: 1000,
+            }
+          );
           document.getElementById("weather").style.backgroundColor = "skyblue";
+          document.getElementById("sunny").style.height = "30dvh";
         },
-        cloudy: function () {
+        cloudy: async function () {
           document.getElementById("weather").animate(
             [
               {
@@ -329,9 +395,10 @@
               duration: 1000,
             }
           );
+          document.getElementById("cloudy").style.display = "block";
           document.getElementById("weather").style.backgroundColor = "#ACC2D9";
         },
-        rainy: function () {
+        rainy: async function () {
           document.getElementById("weather").animate(
             [
               {
@@ -345,6 +412,7 @@
               duration: 1000,
             }
           );
+          document.getElementById("rainy").style.display = "block";
           document.getElementById("weather").style.backgroundColor = "#6D7178";
         },
       };
