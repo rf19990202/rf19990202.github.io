@@ -87,11 +87,7 @@
             margin: 2rem;
             border-radius: 5px;
             overflow: hidden;
-            background: radial-gradient(
-              ellipse at 75% 50%,
-              rgb(251, 255, 5) 10%,
-              rgb(8, 211, 184) 50%
-            );
+            background: rgb(0, 17, 255);
             background-repeat: repeat;
             animation: sky-color 2s linear;
             & > div#weather-info {
@@ -99,14 +95,6 @@
               text-shadow: 1px 1px 2px pink;
             }
           }
-        }
-      }
-      @keyframes sky-color {
-        0% {
-          background-position-y: 15dvh;
-        }
-        100% {
-          background-position-y: 0;
         }
       }
       #sunny {
@@ -283,10 +271,24 @@
                 duration: 1000,
               }
             );
+            document.getElementById("weather").animate(
+              [
+                {
+                  backgroundColor: "blue",
+                },
+                {
+                  backgroundColor: "skyblue",
+                },
+              ],
+              {
+                duration: 1000,
+              }
+            );
           })
           .then(() => {
             document.getElementById("sunny").style.height = "30dvh";
           });
+        document.getElementById("weather").style.backgroundColor = "skyblue";
       }
       // window.addEventListener("scroll", handleScroll)
       // function handleScroll() {
