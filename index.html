@@ -85,19 +85,30 @@
             border: 1px solid grey;
             margin: 2rem;
             border-radius: 5px;
-            background-color: rgba(128, 128, 128, 0.4);
             overflow: hidden;
+            background: radial-gradient(
+              ellipse at 75%,
+              rgb(251, 255, 5) 10%,
+              rgb(8, 211, 184) 50%
+            );
+            animation: sky-color 2s linear;
           }
+        }
+      }
+      @keyframes sky-color {
+        0% {
+          background-position-y: 15dvh;
+        }
+        100% {
+          background-position-y: 0;
         }
       }
       #sunny {
         display: block;
         position: absolute;
-        bottom: 0;
+        bottom: 9dvh;
         right: 0;
         width: 30dvh;
-        /* height: 30dvh; */
-        /* animation: 1s sunup cubic-bezier(0.25, 1, 0.25, 1); */
         & > div:nth-child(1) {
           position: absolute;
           left: 10dvh;
