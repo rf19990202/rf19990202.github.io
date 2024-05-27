@@ -98,7 +98,7 @@
         }
       }
       #sunny {
-        display: block;
+        display: none;
         position: absolute;
         bottom: 9dvh;
         right: 0;
@@ -156,6 +156,12 @@
           opacity: 1;
         }
       }
+      #cloudy {
+        display: none;
+      }
+      #rainy {
+        display: none;
+      }
     </style>
   </head>
 
@@ -212,6 +218,16 @@
           <div></div>
           <div></div>
         </div>
+        <div id="cloudy">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div id="rainy">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </div>
     <div id="console"></div>
@@ -256,47 +272,53 @@
             <p>${ret.RelativeHumidity}%</p>`;
           })
           .then(() => {
-            document.getElementById("sunny").animate(
-              [
+            // TODO different weather animations
+            // var weather should come from api
+            let weather = "sunny";
+            if (weather == "sunny") {
+              document.getElementById("sunny").style.display = "block";
+              document.getElementById("sunny").animate(
+                [
+                  {
+                    height: "0",
+                    opacity: "0",
+                  },
+                  {
+                    height: "30dvh",
+                    opacity: "1",
+                  },
+                ],
                 {
-                  height: "0",
-                  opacity: "0",
-                },
-                {
-                  height: "30dvh",
-                  opacity: "1",
-                },
-              ],
-              {
-                duration: 1000,
-              }
-            );
-            document.getElementById("weather").animate(
-              [
-                {
-                  backgroundColor: "blue",
-                },
-                {
-                  backgroundColor: "skyblue",
-                },
-              ],
-              {
-                duration: 1000,
-              }
-            );
+                  duration: 1000,
+                }
+              );
+              weatherBackgroundAnimation.sunny();
+            }
           })
           .then(() => {
             document.getElementById("sunny").style.height = "30dvh";
           });
         document.getElementById("weather").style.backgroundColor = "skyblue";
       }
-      // window.addEventListener("scroll", handleScroll)
-      // function handleScroll() {
-      //   let scrollTop = window.scrollY
-      //   let scrollHeight = document.body.scrollHeight
-      //   let height = window.innerHeight
-      //   let scrollPercent = (scrollTop / (scrollHeight - height)) * 100
-      // }
+      const weatherBackgroundAnimation = {
+        sunny: function () {
+          document.getElementById("weather").animate(
+            [
+              {
+                backgroundColor: "blue",
+              },
+              {
+                backgroundColor: "skyblue",
+              },
+            ],
+            {
+              duration: 1000,
+            }
+          );
+        },
+        cloudy: function () {},
+        rainy: function () {},
+      };
     </script>
   </body>
 </html>
