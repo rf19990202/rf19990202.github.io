@@ -334,10 +334,18 @@
           .then((ret) => ret.json())
           .then((ret) => {
             document.getElementById("weather-info").innerHTML = `
-            <p>${ret.Time}</p>
-            <p>${ret.StationName}</p>
-            <p>${ret.Temperature}°C</p>
-            <p>${ret.RelativeHumidity}%</p>`;
+            <p>${ret.time}</p>
+            <p>${ret.countyName}</p>
+            <p>${ret.stationName}</p>
+            <p>${ret.temperature}°C</p>
+            <p>${ret.relativeHumidity}%</p>
+            <p>precipitation:${ret.precipitation}%</p>`;
+            switch (ret.weather) {
+              case "陰有雷":
+                return "cloudy";
+              default:
+                return "sunny";
+            }
           })
           .then(() => {
             // TODO different weather animations
