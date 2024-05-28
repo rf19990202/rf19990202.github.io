@@ -344,6 +344,32 @@
           );
           document.getElementById("cloudy").style.display = "block";
           document.getElementById("weather").style.backgroundColor = "#ACC2D9";
+          document.getElementById("cloudy").children[0].animate(
+            [
+              {
+                left: "-5rem",
+              },
+              {
+                left: "0",
+              },
+            ],
+            {
+              duration: 1000,
+            }
+          );
+          document.getElementById("cloudy").children[1].animate(
+            [
+              {
+                right: "-8rem",
+              },
+              {
+                right: "0",
+              },
+            ],
+            {
+              duration: 1000,
+            }
+          );
         },
         rainy: async function () {
           document.getElementById("weather").animate(
