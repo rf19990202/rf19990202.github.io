@@ -19,7 +19,9 @@
       }
 
       html {
+        width: 100%;
         height: 100%;
+        overflow: hidden;
       }
 
       body {
@@ -165,24 +167,22 @@
         overflow: hidden;
         & > div:nth-child(1) {
           position: absolute;
-          width: 40%;
-          height: 90%;
+          width: 7.5rem;
+          height: 7.5rem;
           overflow: hidden;
           & > div:nth-child(1) {
             position: absolute;
-            top: -10dvh;
-            left: -10dvh;
-            width: 20dvh;
-            height: 20dvh;
+            inset: -40% auto auto -20%;
+            width: 70%;
+            height: 70%;
             background-color: white;
             border-radius: 50%;
           }
           & > div:nth-child(2) {
             position: absolute;
-            top: -5dvh;
-            left: 8dvh;
-            width: 10dvh;
-            height: 10dvh;
+            inset: -30% auto auto 40%;
+            width: 50%;
+            height: 50%;
             background-color: white;
             border-radius: 50%;
           }
@@ -190,33 +190,30 @@
         & > div:nth-child(2) {
           position: absolute;
           right: 0;
-          width: 50%;
-          height: 90%;
+          width: 9rem;
+          height: 9rem;
           overflow: hidden;
           & > div:nth-child(1) {
             position: absolute;
-            top: -7dvh;
-            right: -10dvh;
-            width: 20dvh;
-            height: 20dvh;
+            inset: -20% -20% auto auto;
+            width: 65%;
+            height: 65%;
             background-color: white;
             border-radius: 50%;
           }
           & > div:nth-child(2) {
             position: absolute;
-            top: -6dvh;
-            right: 3dvh;
-            width: 15dvh;
-            height: 15dvh;
+            inset: -10% 30% auto auto;
+            width: 40%;
+            height: 40%;
             background-color: white;
             border-radius: 50%;
           }
           & > div:nth-child(3) {
             position: absolute;
-            top: -5dvh;
-            right: 15dvh;
-            width: 10dvh;
-            height: 10dvh;
+            inset: -10% 65% auto auto;
+            width: 25%;
+            height: 25%;
             background-color: white;
             border-radius: 50%;
           }
