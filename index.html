@@ -8,9 +8,6 @@
     />
     <title>Intro</title>
     <style>
-      #console {
-        display: none;
-      }
       * {
         margin: 0;
         padding: 0;
@@ -39,6 +36,7 @@
           top: 8vh;
           height: 60dvh;
           align-items: center;
+          justify-content: center;
 
           &::before {
             position: absolute;
@@ -54,7 +52,7 @@
         position: absolute;
         box-sizing: content-box;
         width: 90%;
-        height: 50%;
+        height: 90%;
         border: 1px solid grey;
         margin: 2rem;
         border-radius: 5px;
@@ -86,6 +84,7 @@
           height: 10dvh;
           background-color: rgb(250, 250, 0);
           border-radius: 50%;
+          z-index: 1;
         }
         & > div:nth-child(2) {
           position: absolute;
@@ -96,7 +95,6 @@
           background-color: rgb(125, 125, 0);
           border-radius: 50%;
           animation: sunshine 2s linear infinite;
-          z-index: -1;
         }
         & > div:nth-child(3) {
           position: absolute;
@@ -108,7 +106,6 @@
           border-radius: 50%;
           animation: sunshine 2s linear infinite;
           animation-delay: 1s;
-          z-index: -1;
         }
       }
       @keyframes sunshine {
@@ -236,7 +233,6 @@
         </div>
       </div>
     </div>
-    <div id="console"></div>
     <script defer>
       let BASE_URL = "https://phrasal-clover-408902.de.r.appspot.com";
       (async () => {
@@ -286,10 +282,7 @@
                 return "sunny";
             }
           })
-          .then(() => {
-            // TODO different weather animations
-            // weather should come from api
-            let weather = "cloudy";
+          .then((weather) => {
             weatherBackgroundAnimation[weather]();
           })
           .then(() => {});
