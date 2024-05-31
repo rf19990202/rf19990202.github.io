@@ -8,20 +8,17 @@
     />
     <title>Intro</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        position: relative;
-        overscroll-behavior: none;
-      }
-
       html {
-        width: 100%;
-        height: 100%;
+        position: relative;
+        width: 360px;
+        height: 480px;
         overflow: hidden;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       body {
+        position: absolute;
         height: 100%;
         word-wrap: break-word;
         overflow: hidden;
@@ -29,30 +26,13 @@
         width: 360px;
         margin-left: auto;
         margin-right: auto;
-
-        & > :nth-child(1) {
-          display: flex;
-          flex-direction: column;
-          top: 8vh;
-          height: 60dvh;
-          align-items: center;
-          justify-content: center;
-
-          &::before {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            content: "";
-            background-color: rgba(128, 128, 128, 0.4);
-            filter: blur(2px);
-          }
-        }
       }
       #weather {
         position: absolute;
-        box-sizing: content-box;
-        width: 90%;
-        height: 90%;
+        box-sizing: border-box;
+        top: 0;
+        width: 80%;
+        height: 80%;
         border: 1px solid grey;
         margin: 2rem;
         border-radius: 5px;
@@ -68,6 +48,9 @@
           flex-direction: column;
           gap: 0.5rem;
           z-index: 1;
+          & > p {
+            margin: 0;
+          }
         }
       }
       #sunny {
@@ -265,42 +248,43 @@
         display: flex;
         flex-direction: column;
         gap: 0.3rem;
+        & > p {
+          margin: 0;
+        }
       }
     </style>
   </head>
 
   <body>
-    <div>
-      <div id="weather">
-        <div id="weather-info"></div>
-        <div id="sunny">
+    <div id="weather">
+      <div id="weather-info"></div>
+      <div id="sunny">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div id="cloudy">
+        <div>
+          <div></div>
+          <div></div>
+        </div>
+        <div>
           <div></div>
           <div></div>
           <div></div>
         </div>
-        <div id="cloudy">
-          <div>
-            <div></div>
-            <div></div>
-          </div>
-          <div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-        <div id="rainy">
-          <div>
-            <div></div>
-            <div></div>
-          </div>
-          <div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
+      </div>
+      <div id="rainy">
+        <div>
+          <div></div>
           <div></div>
         </div>
+        <div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div></div>
       </div>
     </div>
     <script defer>
@@ -337,11 +321,11 @@
           .then((ret) => ret.json())
           .then((ret) => {
             document.getElementById("weather-info").innerHTML = `
-            <p>${ret.time}</p><hr>
-            <p>${ret.countyName}</p><hr>
-            <p>${ret.stationName}</p><hr>
-            <p>${ret.temperature}°C</p><hr>
-            <p>${ret.relativeHumidity}%</p><hr>
+            <p>${ret.time}</p>
+            <p>${ret.countyName}</p>
+            <p>${ret.stationName}</p>
+            <p>${ret.temperature}°C</p>
+            <p>${ret.relativeHumidity}%</p>
             <div id="precipitation">
             <svg height="32px" width="32px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 511.984 511.984" xml:space="preserve" fill="#000000"><g stroke-width="0"></g><g stroke-linecap="round" stroke-linejoin="round"></g><g> <path style="fill:#CCD1D9;" d="M351.989,10.672c-46.123,0-87.677,19.515-116.871,50.733c-15.647-18.016-38.718-29.406-64.459-29.406 c-47.124,0-85.325,38.202-85.325,85.325c0,0.719,0.008,1.422,0.023,2.141C36.655,129.324,0,172.385,0,223.993 c0,58.904,47.757,106.668,106.661,106.668h245.328c88.356,0,159.995-71.638,159.995-159.995 C511.984,82.294,440.346,10.672,351.989,10.672z"></path> <path style="fill:#AAB2BC;" d="M453.954,47.358c22.922,27.687,36.703,63.217,36.703,101.966 c0,88.372-71.638,159.995-159.995,159.995H85.334c-24.016,0-46.179-7.937-64.006-21.327c19.46,25.905,50.443,42.67,85.333,42.67 h245.328c88.356,0,159.995-71.638,159.995-159.995C511.984,121.043,489.407,76.717,453.954,47.358z"></path> <path style="fill:#5D9CEC;" d="M85.326,501.312c-1.609,0-3.234-0.359-4.766-1.125c-5.266-2.625-7.406-9.047-4.773-14.313 l63.998-127.995c2.641-5.266,9.047-7.406,14.313-4.766c5.273,2.641,7.405,9.046,4.773,14.312L94.873,495.422 C93.006,499.156,89.232,501.312,85.326,501.312z"></path> <path style="fill:#4A89DC;" d="M149.324,501.312c-1.609,0-3.234-0.359-4.766-1.125c-5.266-2.625-7.406-9.047-4.773-14.313 l63.998-127.995c2.641-5.266,9.047-7.406,14.313-4.766c5.272,2.641,7.405,9.046,4.772,14.312l-63.997,127.997 C157.004,499.156,153.23,501.312,149.324,501.312z"></path> <path style="fill:#5D9CEC;" d="M213.322,501.312c-1.609,0-3.234-0.359-4.766-1.125c-5.266-2.625-7.406-9.047-4.773-14.313 l63.998-127.995c2.641-5.266,9.055-7.406,14.304-4.766c5.281,2.641,7.406,9.046,4.781,14.312l-63.998,127.997 C221.001,499.156,217.228,501.312,213.322,501.312z"></path> <path style="fill:#4A89DC;" d="M277.32,501.312c-1.609,0-3.234-0.359-4.766-1.125c-5.266-2.625-7.406-9.047-4.773-14.313 l64.006-127.995c2.625-5.266,9.03-7.406,14.312-4.766c5.266,2.641,7.406,9.046,4.766,14.312l-63.999,127.997 C284.991,499.156,281.225,501.312,277.32,501.312z"></path> </g></svg>
             <p>${ret.precipitation}%</p></div>`;
