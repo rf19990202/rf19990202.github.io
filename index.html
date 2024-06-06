@@ -289,6 +289,7 @@
     </div>
     <script defer>
       let BASE_URL = "https://phrasal-clover-408902.de.r.appspot.com";
+      BASE_URL = "http://localhost:8080";
       (async () => {
         function getLocation() {
           if (navigator.geolocation) {
@@ -311,11 +312,7 @@
               }&time=${new Date().now}`
             ).then((ret) => ret.json());
             let isWeatherInfoFetched = false;
-            let i = 0;
-            while (!isWeatherInfoFetched) {
-              handleGetWeather(station[i].StationId);
-              i++;
-            }
+            handleGetWeather(station[0].StationId);
           },
           onError: function () {},
         };
