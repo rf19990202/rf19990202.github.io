@@ -311,8 +311,7 @@
                 Math.round(p.coords.longitude * 1000000) / 1000000
               }&time=${new Date().now}`
             ).then((ret) => ret.json());
-            let isWeatherInfoFetched = false;
-            handleGetWeather(station[0].StationId);
+            handleGetWeather(station[i].StationId);
           },
           onError: function () {},
         };
